@@ -1,0 +1,64 @@
+<div class="container">
+     <!-- Button trigger modal -->
+     <div class="mt-4">
+        <button type="button" (click)="crear()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Crear Registro
+        </button>
+     </div>
+
+<table class="table mt-2">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let persona of listadoPersonas">
+        <th>{{ persona.id }}</th>
+        <td>{{ persona.username }}</td>
+        <td>{{ persona.email }}</td>
+        <td>
+            <button type="button" (click)="editar(persona.id)" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Editar
+            </button>
+            <button type="button" class="btn btn-danger" (click)="eliminarPersona(persona.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{ tituloModal }}</h5>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="formularioPersona">
+              <div class="container">
+                <label class="col-form-label col-4">Username</label>
+                <div class="col">
+                    <input class="form-control" type="text" formControlName="username">
+                </div>
+                <label class="col-form-label col-4 mt-3">Email</label>
+                <div >
+                    <input class="form-control" type="text" formControlName="email">
+                  </div>
+              </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="cerrarModal" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-success" *ngIf="isEditarCrear" (click)="crearPersona()">{{ nombreBoton }}</button>
+          <button type="button" class="btn btn-success" *ngIf="!isEditarCrear" (click)="editarPersona()">{{ nombreBoton }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
